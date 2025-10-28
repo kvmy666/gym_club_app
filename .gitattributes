@@ -1,0 +1,13 @@
+
+
+# Ignore build folders
+android/* linguist-vendored
+ios/* linguist-vendored
+web/* linguist-vendored
+windows/* linguist-vendored
+test/* linguist-vendored
+
+# Ignore C++ and CMake files if you want to hide them
+*.cpp linguist-detectable=false
+*.h linguist-detectable=false
+*.cmake linguist-detectable=false
