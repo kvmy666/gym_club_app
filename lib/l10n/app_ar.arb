@@ -1,0 +1,160 @@
+{
+  "@@locale": "ar",
+  "appTitle": "إيليت فيتنس",
+  "navHome": "الرئيسية",
+  "navTrack": "متابعة",
+  "navAi": "الذكاء",
+  "navShop": "المتجر",
+  "navSettings": "الإعدادات",
+  "homeGreeting": "مرحباً، {name}!",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeMessage": "خطة التدريب المخصصة جاهزة، فلننجز أهداف اليوم.",
+  "dailyStreak": "سلسلة من {count} يوم",
+  "@dailyStreak": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "minutesLabel": "د",
+  "featuredClasses": "حصص مميزة",
+  "viewAll": "عرض الكل",
+  "focusWorkoutTitle": "جلسة تركيز {category}",
+  "@focusWorkoutTitle": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "focusWorkoutSubtitle": "تمارين قوة موجهة مع إرشادات إيقاع وفترات استشفاء.",
+  "startButton": "ابدأ",
+  "nextButton": "التالي",
+  "hiitBadge": "HIIT",
+  "weeklySummaryTitle": "التقدم الأسبوعي",
+  "weeklySummarySubtitle": "3 من أصل 4 تمارين مكتملة",
+  "weekdayShortLabels": "الإث,الث,الأر,الخ,الج,الس,الح",
+  "classCoachLabel": "المدرب {coach}",
+  "@classCoachLabel": {
+    "placeholders": {
+      "coach": {
+        "type": "String"
+      }
+    }
+  },
+  "classLevelTag": "{level}",
+  "@classLevelTag": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "trackTitle": "متابعة الوزن",
+  "trackSubtitle": "راقب الاتجاهات وسجل الجلسات وحقق وزنك المستهدف.",
+  "weekTab": "أسبوع",
+  "monthTab": "شهر",
+  "yearTab": "سنة",
+  "weightTrendTitle": "الاتجاه",
+  "weightTrendSubtitle": "آخر 7 قياسات",
+  "logWeightButton": "تسجيل الوزن",
+  "currentWeight": "الحالي",
+  "goalWeight": "الهدف {value} كجم",
+  "@goalWeight": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiCoachTitle": "المدرب الذكي",
+  "aiCoachSubtitle": "رؤى من الخدمات المصغرة وفق تعافيك وأهدافك.",
+  "aiMicroserviceHint": "مرتبط بخدمات التدريب والتغذية والأجهزة القابلة للارتداء للتعديل الفوري.",
+  "aiCoachInputHint": "أخبر المدرب الذكي كيف تشعر اليوم...",
+  "shopTitle": "التغذية والمعدات",
+  "shopSubtitle": "مختارات تناسب خطة تدريبك.",
+  "shopSearchHint": "ابحث عن مكملات أو ملابس أو معدات...",
+  "addToCart": "أضف إلى السلة",
+  "settingsTitle": "الإعدادات",
+  "settingsSubtitle": "اضبط التجربة والتكاملات والحساب.",
+  "accountSection": "الحساب",
+  "profileTile": "الملف الشخصي",
+  "profileTileSubtitle": "الأهداف ومعلومات الاتصال والتفضيلات",
+  "notificationsTile": "الإشعارات",
+  "notificationsTileSubtitle": "تنبيهات الحصص وسلسلة الالتزام",
+  "experienceSection": "التجربة",
+  "themeTile": "الوضع",
+  "themeTileSubtitle": "الوضع الحالي {mode}",
+  "@themeTileSubtitle": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "themeSystemLabel": "النظام",
+  "themeLightLabel": "فاتح",
+  "themeDarkLabel": "داكن",
+  "languageTile": "اللغة",
+  "languageSystemLabel": "مطابقة النظام",
+  "integrationsSection": "التكاملات",
+  "healthSyncTile": "منصات الصحة",
+  "healthSyncSubtitle": "Apple Health، Google Fit، Garmin",
+  "supportTile": "الدعم",
+  "supportSubtitle": "تواصل مع الفريق",
+  "logoutButton": "تسجيل الخروج",
+  "profileTitle": "الملف الشخصي",
+  "profileGoalLabel": "الهدف: {goal}",
+  "@profileGoalLabel": {
+    "placeholders": {
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "membershipStatusLabel": "العضوية: {tier}",
+  "@membershipStatusLabel": {
+    "placeholders": {
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "metricsSection": "المؤشرات",
+  "metricWorkouts": "التمارين",
+  "metricMinutes": "الدقائق",
+  "metricCalories": "السعرات",
+  "preferencesSection": "التفضيلات",
+  "goalTile": "هدف التدريب",
+  "scheduleTile": "الجدول",
+  "scheduleTileSubtitle": "الاثنين، الثلاثاء، الخميس، السبت",
+  "nutritionTile": "التغذية",
+  "securitySection": "الأمان",
+  "passwordTile": "كلمة المرور",
+  "passwordTileSubtitle": "آخر تحديث منذ ٣٢ يوماً",
+  "devicesTile": "الأجهزة",
+  "devicesTileSubtitle": "جهازان متصلان",
+  "classesTitle": "الحصص",
+  "classNotFound": "الحصة غير موجودة",
+  "classOverviewHeadline": "لمحة عن الحصة",
+  "classOverviewBody": "إيقاع تدريجي مع إنهاءات إيقاعية وتمارين مرونة وتوجيه لمعدل نبض القلب.",
+  "capacityLabel": "السعة",
+  "intensityLabel": "الشدة",
+  "spotsLabel": "مقعد",
+  "bookClassButton": "احجز الحصة",
+  "joinWaitlistButton": "انضم لقائمة الانتظار",
+  "skipButton": "تخطي",
+  "onboardingTitle1": "صمم روتينك المثالي",
+  "onboardingSubtitle1": "برمجة مخصصة حسب أهدافك ومعداتك ووقتك.",
+  "onboardingTitle2": "تابع كل تكرار وتعافٍ",
+  "onboardingSubtitle2": "تكامل مع الأجهزة، راقب الإجهاد، وعدل الحمل فوراً.",
+  "onboardingTitle3": "خدمات ذكية جاهزة",
+  "onboardingSubtitle3": "مساعدات ذكية تنسق التغذية والتدريب والتحديات في الوقت الحقيقي."
+}

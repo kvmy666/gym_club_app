@@ -27,18 +27,30 @@ class _SignInScreenState extends State<SignInScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(controller: _email, decoration: const InputDecoration(labelText: 'Email')),
+            TextField(
+              controller: _email,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
             const SizedBox(height: 12),
-            TextField(controller: _password, decoration: const InputDecoration(labelText: 'Password'), obscureText: true),
+            TextField(
+              controller: _password,
+              decoration: const InputDecoration(labelText: 'Password'),
+              obscureText: true,
+            ),
             const SizedBox(height: 20),
             FilledButton(onPressed: () {}, child: const Text('Sign in')),
-            TextButton(onPressed: () => context.go('/auth/reset'), child: const Text('Forgot password?')),
+            TextButton(
+              onPressed: () => context.go('/auth/reset'),
+              child: const Text('Forgot password?'),
+            ),
             const Spacer(),
-            TextButton(onPressed: () => context.go('/auth/sign-up'), child: const Text('Create an account')),
+            TextButton(
+              onPressed: () => context.go('/auth/sign-up'),
+              child: const Text('Create an account'),
+            ),
           ],
         ),
       ),
     );
   }
 }
-

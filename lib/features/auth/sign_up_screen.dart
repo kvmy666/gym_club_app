@@ -29,23 +29,47 @@ class _SignUpScreenState extends State<SignUpScreen> {
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
-            TextField(controller: _name, decoration: const InputDecoration(labelText: 'Full name')),
+            TextField(
+              controller: _name,
+              decoration: const InputDecoration(labelText: 'Full name'),
+            ),
             const SizedBox(height: 12),
-            TextField(controller: _email, decoration: const InputDecoration(labelText: 'Email')),
+            TextField(
+              controller: _email,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
             const SizedBox(height: 12),
-            TextField(controller: _password, decoration: const InputDecoration(labelText: 'Password'), obscureText: true),
+            TextField(
+              controller: _password,
+              decoration: const InputDecoration(labelText: 'Password'),
+              obscureText: true,
+            ),
             const SizedBox(height: 20),
             FilledButton(onPressed: () {}, child: const Text('Create account')),
             const SizedBox(height: 12),
-            OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.g_mobiledata), label: const Text('Continue with Google')),
-            OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.apple), label: const Text('Continue with Apple')),
-            OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.facebook), label: const Text('Continue with Facebook')),
+            OutlinedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.g_mobiledata),
+              label: const Text('Continue with Google'),
+            ),
+            OutlinedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.apple),
+              label: const Text('Continue with Apple'),
+            ),
+            OutlinedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.facebook),
+              label: const Text('Continue with Facebook'),
+            ),
             const SizedBox(height: 20),
-            TextButton(onPressed: () => context.go('/auth/sign-in'), child: const Text('Have an account? Sign in')),
+            TextButton(
+              onPressed: () => context.go('/auth/sign-in'),
+              child: const Text('Have an account? Sign in'),
+            ),
           ],
         ),
       ),
     );
   }
 }
-

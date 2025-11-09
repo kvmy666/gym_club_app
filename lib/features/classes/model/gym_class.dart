@@ -17,4 +17,3 @@ class GymClass {
 
   double get occupancy => capacity == 0 ? 0 : booked / capacity;
 }
-

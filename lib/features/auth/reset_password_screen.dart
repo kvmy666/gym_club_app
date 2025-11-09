@@ -25,15 +25,23 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(controller: _email, decoration: const InputDecoration(labelText: 'Email')),
+            TextField(
+              controller: _email,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
             const SizedBox(height: 16),
-            FilledButton(onPressed: () {}, child: const Text('Send reset email')),
+            FilledButton(
+              onPressed: () {},
+              child: const Text('Send reset email'),
+            ),
             const Spacer(),
-            TextButton(onPressed: () => context.go('/auth/sign-in'), child: const Text('Back to sign in')),
+            TextButton(
+              onPressed: () => context.go('/auth/sign-in'),
+              child: const Text('Back to sign in'),
+            ),
           ],
         ),
       ),
     );
   }
 }
-

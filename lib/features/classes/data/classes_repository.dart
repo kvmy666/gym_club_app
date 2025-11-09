@@ -30,4 +30,3 @@ final classesProvider = Provider<List<GymClass>>((ref) {
     ),
   ];
 });
-

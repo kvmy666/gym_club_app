@@ -1,0 +1,160 @@
+{
+  "appTitle": "Elite Fitness",
+  "navHome": "Home",
+  "navTrack": "Track",
+  "navAi": "AI",
+  "navShop": "Shop",
+  "navSettings": "Settings",
+  "homeGreeting": "Welcome back, {name}!",
+  "@homeGreeting": {
+    "description": "Dashboard greeting",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeMessage": "Your personalised plan is ready. Let's crush today's goals.",
+  "dailyStreak": "{count}-day streak",
+  "@dailyStreak": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "minutesLabel": "min",
+  "featuredClasses": "Featured classes",
+  "viewAll": "View all",
+  "focusWorkoutTitle": "{category} focus session",
+  "@focusWorkoutTitle": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "focusWorkoutSubtitle": "Targeted strength with guided tempo cues and recovery timers.",
+  "startButton": "Start",
+  "nextButton": "Next",
+  "hiitBadge": "HIIT",
+  "weeklySummaryTitle": "Weekly progress",
+  "weeklySummarySubtitle": "3 of 4 workouts completed",
+  "weekdayShortLabels": "Mon,Tue,Wed,Thu,Fri,Sat,Sun",
+  "classCoachLabel": "Coach {coach}",
+  "@classCoachLabel": {
+    "placeholders": {
+      "coach": {
+        "type": "String"
+      }
+    }
+  },
+  "classLevelTag": "{level}",
+  "@classLevelTag": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "trackTitle": "Weight tracker",
+  "trackSubtitle": "Monitor trends, log sessions, and hit your target weight.",
+  "weekTab": "Week",
+  "monthTab": "Month",
+  "yearTab": "Year",
+  "weightTrendTitle": "Trend",
+  "weightTrendSubtitle": "Last 7 sessions",
+  "logWeightButton": "Log weight",
+  "currentWeight": "Current",
+  "goalWeight": "Goal {value} kg",
+  "@goalWeight": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "aiCoachTitle": "AI coach",
+  "aiCoachSubtitle": "Microservice insights tuned to your recovery and goals.",
+  "aiMicroserviceHint": "Connected to training, nutrition, and wearable microservices for live adjustments.",
+  "aiCoachInputHint": "Tell your coach how you feel today...",
+  "shopTitle": "Fuel & gear",
+  "shopSubtitle": "Curated essentials that match your training plan.",
+  "shopSearchHint": "Search supplements, apparel, gear...",
+  "addToCart": "Add to cart",
+  "settingsTitle": "Settings",
+  "settingsSubtitle": "Fine-tune experience, integrations, and account.",
+  "accountSection": "ACCOUNT",
+  "profileTile": "Profile",
+  "profileTileSubtitle": "Goals, contact info, and preferences",
+  "notificationsTile": "Notifications",
+  "notificationsTileSubtitle": "Class reminders and streak alerts",
+  "experienceSection": "EXPERIENCE",
+  "themeTile": "Theme",
+  "themeTileSubtitle": "Currently {mode}",
+  "@themeTileSubtitle": {
+    "placeholders": {
+      "mode": {
+        "type": "String"
+      }
+    }
+  },
+  "themeSystemLabel": "System",
+  "themeLightLabel": "Light",
+  "themeDarkLabel": "Dark",
+  "languageTile": "Language",
+  "languageSystemLabel": "Match system",
+  "integrationsSection": "INTEGRATIONS",
+  "healthSyncTile": "Health platforms",
+  "healthSyncSubtitle": "Apple Health, Google Fit, Garmin",
+  "supportTile": "Support",
+  "supportSubtitle": "Chat with the team",
+  "logoutButton": "Log out",
+  "profileTitle": "Profile",
+  "profileGoalLabel": "Goal: {goal}",
+  "@profileGoalLabel": {
+    "placeholders": {
+      "goal": {
+        "type": "String"
+      }
+    }
+  },
+  "membershipStatusLabel": "Membership: {tier}",
+  "@membershipStatusLabel": {
+    "placeholders": {
+      "tier": {
+        "type": "String"
+      }
+    }
+  },
+  "metricsSection": "Metrics",
+  "metricWorkouts": "Workouts",
+  "metricMinutes": "Minutes",
+  "metricCalories": "Calories",
+  "preferencesSection": "Preferences",
+  "goalTile": "Training goal",
+  "scheduleTile": "Schedule",
+  "scheduleTileSubtitle": "Monday, Tuesday, Thursday, Saturday",
+  "nutritionTile": "Nutrition",
+  "securitySection": "Security",
+  "passwordTile": "Password",
+  "passwordTileSubtitle": "Last updated 32 days ago",
+  "devicesTile": "Devices",
+  "devicesTileSubtitle": "2 devices connected",
+  "classesTitle": "Classes",
+  "classNotFound": "Class not found",
+  "classOverviewHeadline": "What to expect",
+  "classOverviewBody": "Progressive pacing with tempo finishers, mobility cooldown, and heart rate coaching.",
+  "capacityLabel": "Capacity",
+  "intensityLabel": "Intensity",
+  "spotsLabel": "spots",
+  "bookClassButton": "Book class",
+  "joinWaitlistButton": "Join waitlist",
+  "skipButton": "Skip",
+  "onboardingTitle1": "Design your perfect routine",
+  "onboardingSubtitle1": "Personalised programming built from your goals, equipment, and availability.",
+  "onboardingTitle2": "Track every rep and recovery",
+  "onboardingSubtitle2": "Integrate wearables, monitor fatigue, and adjust your load instantly.",
+  "onboardingTitle3": "AI microservices on standby",
+  "onboardingSubtitle3": "Smart assistants coordinate nutrition, training, and community challenges in real time."
+}

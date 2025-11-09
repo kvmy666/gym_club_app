@@ -10,12 +10,20 @@ class WorkoutsScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: const [
-          ListTile(leading: Icon(Icons.play_circle), title: Text('Full Body Beginner')), 
-          ListTile(leading: Icon(Icons.play_circle), title: Text('Push Day - Strength')), 
-          ListTile(leading: Icon(Icons.play_circle), title: Text('Yoga Flow - 20 min')), 
+          ListTile(
+            leading: Icon(Icons.play_circle),
+            title: Text('Full Body Beginner'),
+          ),
+          ListTile(
+            leading: Icon(Icons.play_circle),
+            title: Text('Push Day - Strength'),
+          ),
+          ListTile(
+            leading: Icon(Icons.play_circle),
+            title: Text('Yoga Flow - 20 min'),
+          ),
         ],
       ),
     );
   }
 }
-
