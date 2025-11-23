@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navHome => 'Home';
 
   @override
-  String get navTrack => 'Track';
+  String get navTrack => 'Log workout';
 
   @override
   String get navAi => 'AI';
@@ -87,11 +87,14 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get trackTitle => 'Weight tracker';
+  String get trackTitle => 'Log workout';
 
   @override
   String get trackSubtitle =>
-      'Monitor trends, log sessions, and hit your target weight.';
+      'Name your day, pick exercises, and capture every set.';
+
+  @override
+  String get logWorkout => 'Log workout';
 
   @override
   String get weekTab => 'Week';
@@ -109,7 +112,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get weightTrendSubtitle => 'Last 7 sessions';
 
   @override
-  String get logWeightButton => 'Log weight';
+  String get logWeightButton => 'Log workout';
 
   @override
   String get currentWeight => 'Current';
@@ -117,6 +120,112 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String goalWeight(String value) {
     return 'Goal $value kg';
+  }
+
+  @override
+  String get workoutNameLabel => 'Workout name';
+
+  @override
+  String get workoutNameHint => 'Add a name to this session';
+
+  @override
+  String get timeLabel => 'Time';
+
+  @override
+  String get timerLabel => 'Timer';
+
+  @override
+  String get restTimerLabel => 'Rest timer';
+
+  @override
+  String get volumeLabel => 'Volume';
+
+  @override
+  String get setsLabel => 'Sets';
+
+  @override
+  String get setsHeader => 'Sets';
+
+  @override
+  String get addSet => 'Add set';
+
+  @override
+  String get noSetsYet =>
+      'No sets yet. Add your first set to begin tracking.';
+
+  @override
+  String get weightFieldLabel => 'Weight (kg)';
+
+  @override
+  String get invalidWeight => 'Enter a valid weight';
+
+  @override
+  String get repsFieldLabel => 'Reps';
+
+  @override
+  String get invalidReps => 'Enter a valid rep count';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get saveSet => 'Save set';
+
+  @override
+  String get deleteSet => 'Delete set';
+
+  @override
+  String get resumeButton => 'Resume';
+
+  @override
+  String get finishButton => 'Finish';
+
+  @override
+  String get resetButton => 'Reset';
+
+  @override
+  String get resetSessionButton => 'Reset session';
+
+  @override
+  String get summaryHeader => 'Summary of sets';
+
+  @override
+  String get addExerciseButton => 'Choose exercise';
+
+  @override
+  String get exercisePickerTitle => 'Select exercise';
+
+  @override
+  String get exerciseSearchHint => 'Search exercises';
+
+  @override
+  String get exerciseCategoryAll => 'All';
+
+  @override
+  String get exerciseCategoryBack => 'Back';
+
+  @override
+  String get exerciseCategoryChest => 'Chest';
+
+  @override
+  String get exerciseCategoryLegs => 'Legs';
+
+  @override
+  String get exerciseCategoryShoulders => 'Shoulders';
+
+  @override
+  String get exerciseCategoryCore => 'Abs & core';
+
+  @override
+  String get noExercisesYet =>
+      'No exercises yet. Add your first exercise to begin.';
+
+  @override
+  String get deleteExercise => 'Remove exercise';
+
+  @override
+  String exerciseSessionsLabel(int count) {
+    return '$count sets';
   }
 
   @override
@@ -145,6 +254,84 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addToCart => 'Add to cart';
+
+  @override
+  String cartTitle(int count) {
+    return 'Cart • $count items';
+  }
+
+  @override
+  String get cartEmpty => 'Your cart is empty';
+
+  @override
+  String get cartTotalLabel => 'Total (incl. 15% VAT)';
+
+  @override
+  String get cartCheckoutButton => 'Checkout';
+
+  @override
+  String get cartViewButton => 'View cart';
+
+  @override
+  String get personalInfoSection => 'Personal details';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get weightLabel => 'Weight';
+
+  @override
+  String get heightLabel => 'Height';
+
+  @override
+  String get profileSaveButton => 'Save details';
+
+  @override
+  String get profileSavedMessage => 'Profile updated successfully.';
+
+  @override
+  String get membershipSection => 'Club membership';
+
+  @override
+  String membershipRemaining(int days) {
+    return '$days days remaining';
+  }
+
+  @override
+  String get membershipPlans => 'Plans';
+
+  @override
+  String get membershipPlanMonthly => 'Monthly';
+
+  @override
+  String get membershipPlanQuarterly => 'Quarterly';
+
+  @override
+  String get membershipPlanSemiAnnual => 'Semi-annual';
+
+  @override
+  String get membershipPlanAnnual => 'Annual';
+
+  @override
+  String get membershipComparisonTitle => 'Compare plans';
+
+  @override
+  String get membershipRenewButton => 'Renew membership';
+
+  @override
+  String membershipRenewSuccess(String plan) {
+    return 'Membership renewed for $plan.';
+  }
+
+  @override
+  String get supportSection => 'Support';
+
+  @override
+  String get supportEmailLabel => 'Need help? Contact us';
+
+  @override
+  String get supportEmail => 'krom306@gmail.com';
 
   @override
   String get settingsTitle => 'Settings';
@@ -318,4 +505,75 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboardingSubtitle3 =>
       'Smart assistants coordinate nutrition, training, and community challenges in real time.';
+
+  @override
+  String get calcTitle => 'Calorie calculator';
+
+  @override
+  String get calcAgeLabel => 'Age';
+
+  @override
+  String get calcAgeSuffix => 'yrs';
+
+  @override
+  String get calcHeightLabel => 'Height';
+
+  @override
+  String get calcHeightSuffix => 'cm';
+
+  @override
+  String get calcWeightLabel => 'Current weight';
+
+  @override
+  String get calcWeightSuffix => 'kg';
+
+  @override
+  String get calcTargetWeightLabel => 'Target weight';
+
+  @override
+  String get calcGenderMale => 'Male';
+
+  @override
+  String get calcGenderFemale => 'Female';
+
+  @override
+  String get calcActivityLabel => 'Activity level';
+
+  @override
+  String get calcActivitySedentary => 'Sedentary (office job)';
+
+  @override
+  String get calcActivityLight => 'Light (1-3 days/week)';
+
+  @override
+  String get calcActivityModerate => 'Moderate (3-5 days/week)';
+
+  @override
+  String get calcActivityActive => 'Active (6-7 days/week)';
+
+  @override
+  String get calcActivityVeryActive => 'Very active (athlete)';
+
+  @override
+  String get calcGoalLabel => 'Your goal';
+
+  @override
+  String get calcGoalLose => 'Lose weight';
+
+  @override
+  String get calcGoalMaintain => 'Maintain weight';
+
+  @override
+  String get calcGoalGain => 'Gain weight';
+
+  @override
+  String get calcResultTitle => 'Daily intake suggestion';
+
+  @override
+  String get calcResultUnit => 'kcal';
+
+  @override
+  String calcTimeEstimate(int weeks) {
+    return 'Estimated time to goal: $weeks weeks';
+  }
 }

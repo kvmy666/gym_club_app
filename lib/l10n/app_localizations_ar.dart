@@ -15,7 +15,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get navHome => 'الرئيسية';
 
   @override
-  String get navTrack => 'متابعة';
+  String get navTrack => 'سجل التمرين';
 
   @override
   String get navAi => 'الذكاء';
@@ -86,10 +86,14 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get trackTitle => 'متابعة الوزن';
+  String get trackTitle => 'سجل التمرين';
 
   @override
-  String get trackSubtitle => 'راقب الاتجاهات وسجل الجلسات وحقق وزنك المستهدف.';
+  String get trackSubtitle =>
+      'سمّ اليوم التدريبي، واختر التمرين، وسجل كل جلسة.';
+
+  @override
+  String get logWorkout => 'سجل التمرين';
 
   @override
   String get weekTab => 'أسبوع';
@@ -107,7 +111,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get weightTrendSubtitle => 'آخر 7 قياسات';
 
   @override
-  String get logWeightButton => 'تسجيل الوزن';
+  String get logWeightButton => 'سجل التمرين';
 
   @override
   String get currentWeight => 'الحالي';
@@ -115,6 +119,111 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String goalWeight(String value) {
     return 'الهدف $value كجم';
+  }
+
+  @override
+  String get workoutNameLabel => 'اسم التمرين';
+
+  @override
+  String get workoutNameHint => 'أضف اسماً لهذه الجلسة';
+
+  @override
+  String get timeLabel => 'الوقت';
+
+  @override
+  String get timerLabel => 'المؤقت';
+
+  @override
+  String get restTimerLabel => 'مؤقت الراحة';
+
+  @override
+  String get volumeLabel => 'الحجم';
+
+  @override
+  String get setsLabel => 'الجلسات';
+
+  @override
+  String get setsHeader => 'الجلسات';
+
+  @override
+  String get addSet => 'أضف جلسة';
+
+  @override
+  String get noSetsYet =>
+      'لا توجد جلسات بعد. أضف جلستك الأولى لبدء التتبع.';
+
+  @override
+  String get weightFieldLabel => 'الوزن (كجم)';
+
+  @override
+  String get invalidWeight => 'أدخل وزناً صحيحاً';
+
+  @override
+  String get repsFieldLabel => 'التكرارات';
+
+  @override
+  String get invalidReps => 'أدخل عدد تكرارات صالح';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get saveSet => 'احفظ الجلسة';
+
+  @override
+  String get deleteSet => 'حذف الجلسة';
+
+  @override
+  String get resumeButton => 'استمرار';
+
+  @override
+  String get finishButton => 'إنهاء';
+
+  @override
+  String get resetButton => 'إعادة ضبط';
+
+  @override
+  String get resetSessionButton => 'إعادة ضبط الجلسة';
+
+  @override
+  String get summaryHeader => 'ملخص الجلسات';
+
+  @override
+  String get addExerciseButton => 'اختر التمرين';
+
+  @override
+  String get exercisePickerTitle => 'اختر التمرين';
+
+  @override
+  String get exerciseSearchHint => 'ابحث عن تمرين';
+
+  @override
+  String get exerciseCategoryAll => 'الكل';
+
+  @override
+  String get exerciseCategoryBack => 'الظهر';
+
+  @override
+  String get exerciseCategoryChest => 'الصدر';
+
+  @override
+  String get exerciseCategoryLegs => 'الأرجل';
+
+  @override
+  String get exerciseCategoryShoulders => 'الأكتاف';
+
+  @override
+  String get exerciseCategoryCore => 'البطن والوسط';
+
+  @override
+  String get noExercisesYet => 'لا توجد تمارين بعد. أضف التمرين الأول للبدء.';
+
+  @override
+  String get deleteExercise => 'حذف التمرين';
+
+  @override
+  String exerciseSessionsLabel(int count) {
+    return '$count جلسات';
   }
 
   @override
@@ -141,6 +250,84 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get addToCart => 'أضف إلى السلة';
+
+  @override
+  String cartTitle(int count) {
+    return 'السلة • $count منتجات';
+  }
+
+  @override
+  String get cartEmpty => 'سلتك فارغة';
+
+  @override
+  String get cartTotalLabel => 'الإجمالي (شامل 15٪ ضريبة)';
+
+  @override
+  String get cartCheckoutButton => 'أكمل الدفع';
+
+  @override
+  String get cartViewButton => 'عرض السلة';
+
+  @override
+  String get personalInfoSection => 'البيانات الشخصية';
+
+  @override
+  String get emailLabel => 'البريد الإلكتروني';
+
+  @override
+  String get weightLabel => 'الوزن';
+
+  @override
+  String get heightLabel => 'الطول';
+
+  @override
+  String get profileSaveButton => 'حفظ البيانات';
+
+  @override
+  String get profileSavedMessage => 'تم تحديث الملف الشخصي بنجاح.';
+
+  @override
+  String get membershipSection => 'عضوية النادي';
+
+  @override
+  String membershipRemaining(int days) {
+    return 'متبقي $days يوم';
+  }
+
+  @override
+  String get membershipPlans => 'الباقات';
+
+  @override
+  String get membershipPlanMonthly => 'شهري';
+
+  @override
+  String get membershipPlanQuarterly => 'ربع سنوي';
+
+  @override
+  String get membershipPlanSemiAnnual => 'نصف سنوي';
+
+  @override
+  String get membershipPlanAnnual => 'سنوي';
+
+  @override
+  String get membershipComparisonTitle => 'مقارنة الباقات';
+
+  @override
+  String get membershipRenewButton => 'تجديد العضوية';
+
+  @override
+  String membershipRenewSuccess(String plan) {
+    return 'تم تجديد العضوية لمدة $plan.';
+  }
+
+  @override
+  String get supportSection => 'الدعم الفني';
+
+  @override
+  String get supportEmailLabel => 'للمساعدة تواصل معنا عبر';
+
+  @override
+  String get supportEmail => 'krom306@gmail.com';
 
   @override
   String get settingsTitle => 'الإعدادات';
@@ -312,4 +499,75 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get onboardingSubtitle3 =>
       'مساعدات ذكية تنسق التغذية والتدريب والتحديات في الوقت الحقيقي.';
+
+  @override
+  String get calcTitle => 'حاسبة السعرات الحرارية';
+
+  @override
+  String get calcAgeLabel => 'العمر';
+
+  @override
+  String get calcAgeSuffix => 'سنة';
+
+  @override
+  String get calcHeightLabel => 'الطول';
+
+  @override
+  String get calcHeightSuffix => 'سم';
+
+  @override
+  String get calcWeightLabel => 'الوزن الحالي';
+
+  @override
+  String get calcWeightSuffix => 'كجم';
+
+  @override
+  String get calcTargetWeightLabel => 'الوزن المستهدف';
+
+  @override
+  String get calcGenderMale => 'ذكر';
+
+  @override
+  String get calcGenderFemale => 'أنثى';
+
+  @override
+  String get calcActivityLabel => 'مستوى النشاط';
+
+  @override
+  String get calcActivitySedentary => 'خامل (عمل مكتبي)';
+
+  @override
+  String get calcActivityLight => 'خفيف (١-٣ أيام/أسبوع)';
+
+  @override
+  String get calcActivityModerate => 'متوسط (٣-٥ أيام/أسبوع)';
+
+  @override
+  String get calcActivityActive => 'نشط (٦-٧ أيام/أسبوع)';
+
+  @override
+  String get calcActivityVeryActive => 'نشط جداً (رياضي)';
+
+  @override
+  String get calcGoalLabel => 'هدفك';
+
+  @override
+  String get calcGoalLose => 'خفض الوزن';
+
+  @override
+  String get calcGoalMaintain => 'حافظ على الوزن';
+
+  @override
+  String get calcGoalGain => 'زيادة الوزن';
+
+  @override
+  String get calcResultTitle => 'المدخول اليومي المقترح';
+
+  @override
+  String get calcResultUnit => 'سعرة';
+
+  @override
+  String calcTimeEstimate(int weeks) {
+    return 'المدة التقريبية للهدف: $weeks أسابيع';
+  }
 }

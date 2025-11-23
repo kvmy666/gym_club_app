@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/auth/auth_state.dart';
+import '../../core/auth/auth_storage.dart';
+import '../../core/api/api_client.dart';
+import '../../l10n/app_localizations.dart';
 import '../../core/providers/theme_provider.dart';
 import '../../core/providers/locale_provider.dart';
 
@@ -133,7 +136,14 @@ class SettingsScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 32),
             OutlinedButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                await AuthStorage.clearToken();
+                ApiClient.setAuthToken(null);
+                ref.read(authStateProvider.notifier).setUnauthenticated();
+                if (context.mounted) {
+                  context.go('/auth/sign-in');
+                }
+              },
               icon: const Icon(Icons.logout),
               label: Text(l10n.logoutButton),
               style: OutlinedButton.styleFrom(

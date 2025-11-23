@@ -1,24 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class SignUpScreen extends StatefulWidget {
+import '../../core/auth/auth_api.dart';
+import '../../core/auth/auth_state.dart';
+import '../../core/auth/auth_storage.dart';
+import '../../core/api/api_client.dart';
+
+class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _email = TextEditingController();
   final _password = TextEditingController();
-  final _name = TextEditingController();
+  final _confirm = TextEditingController();
+  final _first = TextEditingController();
+  final _last = TextEditingController();
+  String? _gender;
+  bool _loading = false;
+  String? _error;
 
   @override
   void dispose() {
     _email.dispose();
     _password.dispose();
-    _name.dispose();
+    _confirm.dispose();
+    _first.dispose();
+    _last.dispose();
     super.dispose();
+  }
+
+  Future<void> _submit() async {
+    if (_password.text != _confirm.text) {
+      setState(() => _error = 'Passwords do not match');
+      return;
+    }
+    setState(() {
+      _loading = true;
+      _error = null;
+    });
+    try {
+      final data = await AuthApi.register(
+        email: _email.text.trim(),
+        password: _password.text,
+        firstName: _first.text.trim().isEmpty ? null : _first.text.trim(),
+        lastName: _last.text.trim().isEmpty ? null : _last.text.trim(),
+        gender: _gender,
+      );
+      final token = data['token'] as String;
+      await AuthStorage.saveToken(token);
+      ApiClient.setAuthToken(token);
+      ref.read(authStateProvider.notifier).setAuthenticated(token);
+      if (!mounted) return;
+      context.go('/home');
+    } catch (e) {
+      String message = 'Sign up failed';
+      if (e is DioException) {
+        final status = e.response?.statusCode;
+        if (status == 409) {
+          message = 'Email already in use';
+        } else if (e.response?.data is Map &&
+            (e.response?.data['error'] is String)) {
+          message = e.response?.data['error'];
+        }
+      }
+      setState(() => _error = message);
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
   }
 
   @override
@@ -30,8 +84,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: ListView(
           children: [
             TextField(
-              controller: _name,
-              decoration: const InputDecoration(labelText: 'Full name'),
+              controller: _first,
+              decoration: const InputDecoration(labelText: 'First name'),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _last,
+              decoration: const InputDecoration(labelText: 'Last name'),
             ),
             const SizedBox(height: 12),
             TextField(
@@ -44,23 +103,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
               decoration: const InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            const SizedBox(height: 20),
-            FilledButton(onPressed: () {}, child: const Text('Create account')),
             const SizedBox(height: 12),
-            OutlinedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.g_mobiledata),
-              label: const Text('Continue with Google'),
+            TextField(
+              controller: _confirm,
+              decoration: const InputDecoration(labelText: 'Confirm password'),
+              obscureText: true,
             ),
-            OutlinedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.apple),
-              label: const Text('Continue with Apple'),
+            const SizedBox(height: 12),
+            DropdownButtonFormField<String>(
+              initialValue: _gender,
+              onChanged: (val) => setState(() => _gender = val),
+              items: const [
+                DropdownMenuItem(value: 'male', child: Text('Male')),
+                DropdownMenuItem(value: 'female', child: Text('Female')),
+                DropdownMenuItem(value: 'other', child: Text('Other')),
+              ],
+              decoration: const InputDecoration(labelText: 'Gender'),
             ),
-            OutlinedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.facebook),
-              label: const Text('Continue with Facebook'),
+            const SizedBox(height: 20),
+            if (_error != null)
+              Text(
+                _error!,
+                style: const TextStyle(color: Colors.red),
+              ),
+            const SizedBox(height: 12),
+            FilledButton(
+              onPressed: _loading ? null : _submit,
+              child: _loading
+                  ? const CircularProgressIndicator.adaptive()
+                  : const Text('Create account'),
             ),
             const SizedBox(height: 20),
             TextButton(

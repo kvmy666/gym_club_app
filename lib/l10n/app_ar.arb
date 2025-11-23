@@ -2,7 +2,7 @@
   "@@locale": "ar",
   "appTitle": "إيليت فيتنس",
   "navHome": "الرئيسية",
-  "navTrack": "متابعة",
+  "navTrack": "سجل التمرين",
   "navAi": "الذكاء",
   "navShop": "المتجر",
   "navSettings": "الإعدادات",
@@ -57,14 +57,37 @@
       }
     }
   },
-  "trackTitle": "متابعة الوزن",
-  "trackSubtitle": "راقب الاتجاهات وسجل الجلسات وحقق وزنك المستهدف.",
+  "trackTitle": "سجل التمرين",
+  "trackSubtitle": "سمّ اليوم التدريبي، واختر التمرين، وسجل كل جلسة.",
+  "logWorkout": "سجل التمرين",
+  "workoutNameLabel": "اسم التمرين",
+  "workoutNameHint": "أضف اسماً لهذه الجلسة",
+  "timeLabel": "الوقت",
+  "timerLabel": "المؤقت",
+  "restTimerLabel": "مؤقت الراحة",
+  "volumeLabel": "الحجم",
+  "setsLabel": "الجلسات",
+  "setsHeader": "الجلسات",
+  "addSet": "أضف جلسة",
+  "noSetsYet": "لا توجد جلسات بعد. أضف جلستك الأولى لبدء التتبع.",
+  "weightFieldLabel": "الوزن (كجم)",
+  "invalidWeight": "أدخل وزناً صحيحاً",
+  "repsFieldLabel": "التكرارات",
+  "invalidReps": "أدخل عدد تكرارات صالح",
+  "cancel": "إلغاء",
+  "saveSet": "احفظ الجلسة",
+  "deleteSet": "حذف الجلسة",
+  "resumeButton": "استمرار",
+  "finishButton": "إنهاء",
+  "resetButton": "إعادة ضبط",
+  "resetSessionButton": "إعادة ضبط الجلسة",
+  "summaryHeader": "ملخص الجلسات",
   "weekTab": "أسبوع",
   "monthTab": "شهر",
   "yearTab": "سنة",
   "weightTrendTitle": "الاتجاه",
   "weightTrendSubtitle": "آخر 7 قياسات",
-  "logWeightButton": "تسجيل الوزن",
+  "logWeightButton": "سجل التمرين",
   "currentWeight": "الحالي",
   "goalWeight": "الهدف {value} كجم",
   "@goalWeight": {
@@ -82,6 +105,39 @@
   "shopSubtitle": "مختارات تناسب خطة تدريبك.",
   "shopSearchHint": "ابحث عن مكملات أو ملابس أو معدات...",
   "addToCart": "أضف إلى السلة",
+  "cartTitle": "السلة • {count} منتجات",
+  "@cartTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cartEmpty": "سلتك فارغة",
+  "cartTotalLabel": "الإجمالي (شامل 15٪ ضريبة)",
+  "cartCheckoutButton": "أكمل الدفع",
+  "cartViewButton": "عرض السلة",
+  "personalInfoSection": "البيانات الشخصية",
+  "emailLabel": "البريد الإلكتروني",
+  "weightLabel": "الوزن",
+  "heightLabel": "الطول",
+  "membershipSection": "عضوية النادي",
+  "membershipRemaining": "متبقي {days} يوم",
+  "@membershipRemaining": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "membershipPlans": "الباقات",
+  "membershipPlanMonthly": "شهري",
+  "membershipPlanQuarterly": "ربع سنوي",
+  "membershipPlanSemiAnnual": "نصف سنوي",
+  "membershipPlanAnnual": "سنوي",
+  "supportSection": "الدعم الفني",
+  "supportEmailLabel": "للمساعدة تواصل معنا عبر",
+  "supportEmail": "krom306@gmail.com",
   "settingsTitle": "الإعدادات",
   "settingsSubtitle": "اضبط التجربة والتكاملات والحساب.",
   "accountSection": "الحساب",
@@ -156,5 +212,66 @@
   "onboardingTitle2": "تابع كل تكرار وتعافٍ",
   "onboardingSubtitle2": "تكامل مع الأجهزة، راقب الإجهاد، وعدل الحمل فوراً.",
   "onboardingTitle3": "خدمات ذكية جاهزة",
-  "onboardingSubtitle3": "مساعدات ذكية تنسق التغذية والتدريب والتحديات في الوقت الحقيقي."
+  "onboardingSubtitle3": "مساعدات ذكية تنسق التغذية والتدريب والتحديات في الوقت الحقيقي.",
+  "calcTitle": "حاسبة السعرات الحرارية",
+  "calcAgeLabel": "العمر",
+  "calcAgeSuffix": "سنة",
+  "calcHeightLabel": "الطول",
+  "calcHeightSuffix": "سم",
+  "calcWeightLabel": "الوزن الحالي",
+  "calcWeightSuffix": "كجم",
+  "calcTargetWeightLabel": "الوزن المستهدف",
+  "calcGenderMale": "ذكر",
+  "calcGenderFemale": "أنثى",
+  "calcActivityLabel": "مستوى النشاط",
+  "calcActivitySedentary": "خامل (عمل مكتبي)",
+  "calcActivityLight": "خفيف (١-٣ أيام/أسبوع)",
+  "calcActivityModerate": "متوسط (٣-٥ أيام/أسبوع)",
+  "calcActivityActive": "نشط (٦-٧ أيام/أسبوع)",
+  "calcActivityVeryActive": "نشط جداً (رياضي)",
+  "calcGoalLabel": "هدفك",
+  "calcGoalLose": "خفض الوزن",
+  "calcGoalMaintain": "حافظ على الوزن",
+  "calcGoalGain": "زيادة الوزن",
+  "calcResultTitle": "المدخول اليومي المقترح",
+  "calcResultUnit": "سعرة",
+  "calcTimeEstimate": "المدة التقريبية للهدف: {weeks} أسابيع",
+  "@calcTimeEstimate": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "addExerciseButton": "اختر التمرين",
+  "exercisePickerTitle": "اختر التمرين",
+  "exerciseSearchHint": "ابحث عن تمرين",
+  "exerciseCategoryAll": "الكل",
+  "exerciseCategoryBack": "الظهر",
+  "exerciseCategoryChest": "الصدر",
+  "exerciseCategoryLegs": "الأرجل",
+  "exerciseCategoryShoulders": "الأكتاف",
+  "exerciseCategoryCore": "البطن والوسط",
+  "noExercisesYet": "لا توجد تمارين بعد. أضف التمرين الأول للبدء.",
+  "deleteExercise": "حذف التمرين",
+  "exerciseSessionsLabel": "{count} جلسات",
+  "@exerciseSessionsLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "profileSaveButton": "حفظ البيانات",
+  "profileSavedMessage": "تم تحديث الملف الشخصي بنجاح.",
+  "membershipComparisonTitle": "مقارنة الباقات",
+  "membershipRenewButton": "تجديد العضوية",
+  "membershipRenewSuccess": "تم تجديد العضوية لمدة {plan}.",
+  "@membershipRenewSuccess": {
+    "placeholders": {
+      "plan": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -1,13 +1,10 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/theme/motion.dart';
-import '../classes/data/classes_repository.dart';
-import '../classes/model/gym_class.dart';
+import '../../l10n/app_localizations.dart';
+import '../track/providers/training_days_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -21,7 +18,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   late final AnimationController _controller;
   int _selectedCategory = 0;
 
-  final categories = const [
+  static const List<String> _fallbackCategories = [
     'custom',
     'chest',
     'back',
@@ -49,7 +46,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
-    final classes = ref.watch(classesProvider);
+    final trainingDays = ref.watch(trainingDaysProvider);
+    final categories = trainingDays.maybeWhen(
+      data: (days) => days.isEmpty
+          ? _fallbackCategories
+          : days.map((d) => d.name.isEmpty ? 'Custom' : d.name).toList(),
+      orElse: () => _fallbackCategories,
+    );
+    final selectedIndex = categories.isEmpty
+        ? 0
+        : _selectedCategory.clamp(0, categories.length - 1);
+    final selectedCategory =
+        categories.isEmpty ? 'Custom' : categories[selectedIndex];
 
     return Scaffold(
       extendBody: true,
@@ -77,7 +85,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          l10n.homeGreeting('Sara'),
+                          l10n.homeGreeting('عبدالكريم الشدوخي'),
                           style: theme.textTheme.headlineMedium?.copyWith(
                             fontWeight: FontWeight.w700,
                           ),
@@ -92,36 +100,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                         const SizedBox(height: 24),
                         _CategorySelector(
                           categories: categories,
-                          selectedIndex: _selectedCategory,
+                          selectedIndex: selectedIndex,
                           onSelected: (index) {
                             setState(() => _selectedCategory = index);
                           },
                         ),
                         const SizedBox(height: 24),
                         _WorkoutCard(
-                          category: categories[_selectedCategory],
-                          onViewSchedule: () => context.push('/home/classes'),
+                          category: selectedCategory,
+                          onViewSchedule: () => context.go('/track'),
                         ),
                         const SizedBox(height: 24),
-                        _WeeklyProgressChart(),
-                        const SizedBox(height: 32),
-                        _SectionHeader(
-                          title: l10n.featuredClasses,
-                          actionLabel: l10n.viewAll,
-                          onAction: () => context.push('/home/classes'),
-                        ),
+                        const _CalorieCalculator(),
+                        const SizedBox(height: 24),
                       ],
                     ),
-                  ),
-                ),
-                SliverPadding(
-                  padding: const EdgeInsets.only(
-                    left: 24,
-                    right: 24,
-                    bottom: 24,
-                  ),
-                  sliver: SliverToBoxAdapter(
-                    child: _ClassRail(classes: classes),
                   ),
                 ),
               ],
@@ -383,6 +376,303 @@ class _WorkoutCardState extends State<_WorkoutCard> {
   }
 }
 
+class _CalorieCalculator extends StatefulWidget {
+  const _CalorieCalculator();
+
+  @override
+  State<_CalorieCalculator> createState() => _CalorieCalculatorState();
+}
+
+enum _CalcGender { male, female }
+
+enum _CalcActivity { sedentary, light, moderate, active, veryActive }
+
+enum _CalcGoal { lose, maintain, gain }
+
+class _CalorieCalculatorState extends State<_CalorieCalculator> {
+  int _age = 28;
+  double _height = 172;
+  double _weight = 72;
+  double _targetWeight = 68;
+  _CalcGender _gender = _CalcGender.male;
+  _CalcActivity _activity = _CalcActivity.moderate;
+  _CalcGoal _goal = _CalcGoal.maintain;
+
+  double get _maintenanceCalories {
+    final base = 10 * _weight + 6.25 * _height - 5 * _age;
+    final genderAdjustment = _gender == _CalcGender.male ? 5 : -161;
+    return (base + genderAdjustment) * _activityMultiplier(_activity);
+  }
+
+  double get _suggestedCalories {
+    final maintenance = _maintenanceCalories;
+    switch (_goal) {
+      case _CalcGoal.lose:
+        return (maintenance - 400).clamp(1200, double.infinity);
+      case _CalcGoal.maintain:
+        return maintenance;
+      case _CalcGoal.gain:
+        return maintenance + 300;
+    }
+  }
+
+  int? get _weeksEstimate {
+    final weeklyChange = switch (_goal) {
+      _CalcGoal.lose => 0.5,
+      _CalcGoal.maintain => 0.0,
+      _CalcGoal.gain => 0.25,
+    };
+    final delta = (_targetWeight - _weight).abs();
+    if (weeklyChange == 0 || delta < 0.1) return null;
+    return (delta / weeklyChange).ceil();
+  }
+
+  double _activityMultiplier(_CalcActivity activity) {
+    switch (activity) {
+      case _CalcActivity.sedentary:
+        return 1.2;
+      case _CalcActivity.light:
+        return 1.375;
+      case _CalcActivity.moderate:
+        return 1.55;
+      case _CalcActivity.active:
+        return 1.725;
+      case _CalcActivity.veryActive:
+        return 1.9;
+    }
+  }
+
+  String _activityLabel(AppLocalizations l10n, _CalcActivity activity) {
+    switch (activity) {
+      case _CalcActivity.sedentary:
+        return l10n.calcActivitySedentary;
+      case _CalcActivity.light:
+        return l10n.calcActivityLight;
+      case _CalcActivity.moderate:
+        return l10n.calcActivityModerate;
+      case _CalcActivity.active:
+        return l10n.calcActivityActive;
+      case _CalcActivity.veryActive:
+        return l10n.calcActivityVeryActive;
+    }
+  }
+
+  String _goalLabel(AppLocalizations l10n, _CalcGoal goal) {
+    switch (goal) {
+      case _CalcGoal.lose:
+        return l10n.calcGoalLose;
+      case _CalcGoal.maintain:
+        return l10n.calcGoalMaintain;
+      case _CalcGoal.gain:
+        return l10n.calcGoalGain;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final calories = _suggestedCalories.round();
+    final weeks = _weeksEstimate;
+
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+      elevation: 6,
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(
+                  l10n.calcTitle,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const Spacer(),
+                Icon(
+                  Icons.local_fire_department_outlined,
+                  color: theme.colorScheme.primary,
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 12,
+              children: _CalcGender.values.map((gender) {
+                final selected = _gender == gender;
+                final label = gender == _CalcGender.male
+                    ? l10n.calcGenderMale
+                    : l10n.calcGenderFemale;
+                return ChoiceChip(
+                  label: Text(label),
+                  selected: selected,
+                  onSelected: (_) => setState(() => _gender = gender),
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 20),
+            _buildSlider(
+              context: context,
+              label: l10n.calcAgeLabel,
+              valueLabel: '$_age${l10n.calcAgeSuffix}',
+              min: 16,
+              max: 70,
+              value: _age.toDouble(),
+              onChanged: (value) => setState(() => _age = value.round()),
+            ),
+            const SizedBox(height: 16),
+            _buildSlider(
+              context: context,
+              label: l10n.calcHeightLabel,
+              valueLabel: '${_height.round()}${l10n.calcHeightSuffix}',
+              min: 145,
+              max: 210,
+              value: _height,
+              onChanged: (value) => setState(() => _height = value),
+            ),
+            const SizedBox(height: 16),
+            _buildSlider(
+              context: context,
+              label: l10n.calcWeightLabel,
+              valueLabel: '${_weight.toStringAsFixed(1)}${l10n.calcWeightSuffix}',
+              min: 45,
+              max: 140,
+              value: _weight,
+              onChanged: (value) => setState(() => _weight = value),
+            ),
+            const SizedBox(height: 16),
+            _buildSlider(
+              context: context,
+              label: l10n.calcTargetWeightLabel,
+              valueLabel:
+                  '${_targetWeight.toStringAsFixed(1)}${l10n.calcWeightSuffix}',
+              min: 45,
+              max: 140,
+              value: _targetWeight,
+              onChanged: (value) => setState(() => _targetWeight = value),
+            ),
+            const SizedBox(height: 16),
+            DropdownMenu<_CalcActivity>(
+              initialSelection: _activity,
+              label: Text(l10n.calcActivityLabel),
+              dropdownMenuEntries: _CalcActivity.values
+                  .map(
+                    (activity) => DropdownMenuEntry(
+                      value: activity,
+                      label: _activityLabel(l10n, activity),
+                    ),
+                  )
+                  .toList(),
+              onSelected: (value) {
+                if (value == null) return;
+                setState(() => _activity = value);
+              },
+            ),
+            const SizedBox(height: 20),
+            Text(
+              l10n.calcGoalLabel,
+              style: theme.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: _CalcGoal.values.map((goal) {
+                final selected = _goal == goal;
+                return ChoiceChip(
+                  selected: selected,
+                  label: Text(_goalLabel(l10n, goal)),
+                  onSelected: (_) => setState(() => _goal = goal),
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 24),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(22),
+                color: theme.colorScheme.primary.withValues(alpha: 0.08),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.calcResultTitle,
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '$calories ${l10n.calcResultUnit}',
+                    style: theme.textTheme.displaySmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  if (weeks != null) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.calcTimeEstimate(weeks),
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSlider({
+    required BuildContext context,
+    required String label,
+    required String valueLabel,
+    required double min,
+    required double max,
+    required double value,
+    required ValueChanged<double> onChanged,
+  }) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              label,
+              style: theme.textTheme.labelLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const Spacer(),
+            Text(
+              valueLabel,
+              style: theme.textTheme.labelLarge,
+            ),
+          ],
+        ),
+        Slider(
+          min: min,
+          max: max,
+          value: value.clamp(min, max),
+          onChanged: onChanged,
+        ),
+      ],
+    );
+  }
+}
+
 class _WorkoutPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -425,271 +715,6 @@ class _WorkoutPreview extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _WeeklyProgressChart extends StatefulWidget {
-  @override
-  State<_WeeklyProgressChart> createState() => _WeeklyProgressChartState();
-}
-
-class _WeeklyProgressChartState extends State<_WeeklyProgressChart>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-
-  final values = [3, 4, 2, 5, 1, 0, 4];
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: AppMotion.cardEntrance,
-    )..forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final maxValue = values
-        .reduce(math.max)
-        .toDouble()
-        .clamp(1, double.infinity);
-    final l10n = AppLocalizations.of(context)!;
-
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: theme.colorScheme.surface,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(
-              alpha: theme.brightness == Brightness.dark ? 0.24 : 0.08,
-            ),
-            blurRadius: 24,
-            offset: const Offset(0, 12),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                l10n.weeklySummaryTitle,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const Spacer(),
-              Text(
-                l10n.weeklySummarySubtitle,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.primary,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            height: 120,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: List.generate(values.length, (index) {
-                final dayValue = values[index].toDouble();
-                final factor = dayValue / maxValue;
-                return Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    child: AnimatedBuilder(
-                      animation: _controller,
-                      builder: (context, child) {
-                        return Align(
-                          alignment: Alignment.bottomCenter,
-                          child: FractionallySizedBox(
-                            heightFactor:
-                                Curves.easeOut.transform(_controller.value) *
-                                factor,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                gradient: LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  colors: [
-                                    theme.colorScheme.primary,
-                                    theme.colorScheme.primary.withValues(
-                                      alpha: 0.4,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                );
-              }),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: l10n.weekdayShortLabels.split(',').map((label) {
-              return Expanded(
-                child: Center(
-                  child: Text(
-                    label,
-                    style: theme.textTheme.labelMedium?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({
-    required this.title,
-    required this.actionLabel,
-    required this.onAction,
-  });
-
-  final String title;
-  final String actionLabel;
-  final VoidCallback onAction;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Row(
-      children: [
-        Text(
-          title,
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const Spacer(),
-        TextButton(onPressed: onAction, child: Text(actionLabel)),
-      ],
-    );
-  }
-}
-
-class _ClassRail extends StatelessWidget {
-  const _ClassRail({required this.classes});
-
-  final List<GymClass> classes;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 220,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: classes.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 16),
-        itemBuilder: (context, index) {
-          final klass = classes[index];
-          return _ClassCard(klass: klass);
-        },
-      ),
-    );
-  }
-}
-
-class _ClassCard extends StatelessWidget {
-  const _ClassCard({required this.klass});
-
-  final GymClass klass;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final l10n = AppLocalizations.of(context)!;
-    final startTime = TimeOfDay.fromDateTime(klass.startTime).format(context);
-
-    return Container(
-      width: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: theme.colorScheme.surface,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(
-              alpha: theme.brightness == Brightness.dark ? 0.32 : 0.08,
-            ),
-            blurRadius: 18,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(
-                Icons.access_time_rounded,
-                size: 18,
-                color: theme.colorScheme.primary,
-              ),
-              const SizedBox(width: 6),
-              Text(startTime, style: theme.textTheme.labelMedium),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(
-            klass.name,
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            l10n.classCoachLabel(klass.instructor),
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const Spacer(),
-          Row(
-            children: [
-              Expanded(
-                child: LinearProgressIndicator(
-                  value: (klass.booked / klass.capacity).clamp(0, 1),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Text(
-                '${klass.booked}/${klass.capacity}',
-                style: theme.textTheme.labelMedium,
-              ),
-            ],
           ),
         ],
       ),

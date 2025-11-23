@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../providers/app_startup_provider.dart';
+import '../auth/auth_state.dart';
+import '../auth/auth_bootstrap_provider.dart';
 import '../../features/onboarding/onboarding_screen.dart';
 import '../../features/home/home_screen.dart';
 import '../../features/classes/classes_screen.dart';
@@ -26,12 +28,27 @@ final _settingsKey = GlobalKey<NavigatorState>(debugLabel: 'settings');
 
 final routerProvider = Provider<GoRouter>((ref) {
   final hasSeenOnboarding = ref.watch(onboardingStatusProvider);
-  return _createRouter(hasSeenOnboarding);
+  final auth = ref.watch(authStateProvider);
+  ref.watch(authBootstrapProvider);
+  return _createRouter(hasSeenOnboarding, auth);
 });
 
-GoRouter _createRouter(bool hasSeenOnboarding) => GoRouter(
+GoRouter _createRouter(bool hasSeenOnboarding, AuthState auth) => GoRouter(
   navigatorKey: _rootKey,
   initialLocation: hasSeenOnboarding ? '/home' : '/onboarding',
+  redirect: (context, state) {
+    final loc = state.uri.toString();
+    final loggingIn = loc.startsWith('/auth/');
+    final onboarding = loc == '/onboarding';
+    if (auth.status == AuthStatus.authenticated) {
+      if (loggingIn || onboarding) return '/home';
+      return null;
+    }
+    if (auth.status == AuthStatus.unknown) return null;
+    // unauthenticated
+    if (!loggingIn) return '/auth/sign-in';
+    return null;
+  },
   routes: [
     GoRoute(path: '/onboarding', builder: (_, __) => const OnboardingScreen()),
     GoRoute(path: '/auth/sign-in', builder: (_, __) => const SignInScreen()),

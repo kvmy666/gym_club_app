@@ -233,14 +233,20 @@ abstract class AppLocalizations {
   /// No description provided for @trackTitle.
   ///
   /// In en, this message translates to:
-  /// **'Weight tracker'**
+  /// **'Log workout'**
   String get trackTitle;
 
   /// No description provided for @trackSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Monitor trends, log sessions, and hit your target weight.'**
+  /// **'Name your day, pick exercises, and capture every set.'**
   String get trackSubtitle;
+
+  /// No description provided for @logWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log workout'**
+  String get logWorkout;
 
   /// No description provided for @weekTab.
   ///
@@ -275,7 +281,7 @@ abstract class AppLocalizations {
   /// No description provided for @logWeightButton.
   ///
   /// In en, this message translates to:
-  /// **'Log weight'**
+  /// **'Log workout'**
   String get logWeightButton;
 
   /// No description provided for @currentWeight.
@@ -289,6 +295,210 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Goal {value} kg'**
   String goalWeight(String value);
+
+  /// No description provided for @workoutNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Workout name'**
+  String get workoutNameLabel;
+
+  /// No description provided for @workoutNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a name to this session'**
+  String get workoutNameHint;
+
+  /// No description provided for @timeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get timeLabel;
+
+  /// No description provided for @timerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Timer'**
+  String get timerLabel;
+
+  /// No description provided for @restTimerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Rest timer'**
+  String get restTimerLabel;
+
+  /// No description provided for @volumeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume'**
+  String get volumeLabel;
+
+  /// No description provided for @setsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sets'**
+  String get setsLabel;
+
+  /// No description provided for @setsHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Sets'**
+  String get setsHeader;
+
+  /// No description provided for @addSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Add set'**
+  String get addSet;
+
+  /// No description provided for @noSetsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No sets yet. Add your first set to begin tracking.'**
+  String get noSetsYet;
+
+  /// No description provided for @weightFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight (kg)'**
+  String get weightFieldLabel;
+
+  /// No description provided for @invalidWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid weight'**
+  String get invalidWeight;
+
+  /// No description provided for @repsFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reps'**
+  String get repsFieldLabel;
+
+  /// No description provided for @invalidReps.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid rep count'**
+  String get invalidReps;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @saveSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Save set'**
+  String get saveSet;
+
+  /// No description provided for @deleteSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete set'**
+  String get deleteSet;
+
+  /// No description provided for @resumeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get resumeButton;
+
+  /// No description provided for @finishButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finishButton;
+
+  /// No description provided for @resetButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get resetButton;
+
+  /// No description provided for @resetSessionButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset session'**
+  String get resetSessionButton;
+
+  /// No description provided for @summaryHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary of sets'**
+  String get summaryHeader;
+
+  /// No description provided for @addExerciseButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose exercise'**
+  String get addExerciseButton;
+
+  /// No description provided for @exercisePickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select exercise'**
+  String get exercisePickerTitle;
+
+  /// No description provided for @exerciseSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search exercises'**
+  String get exerciseSearchHint;
+
+  /// No description provided for @exerciseCategoryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get exerciseCategoryAll;
+
+  /// No description provided for @exerciseCategoryBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get exerciseCategoryBack;
+
+  /// No description provided for @exerciseCategoryChest.
+  ///
+  /// In en, this message translates to:
+  /// **'Chest'**
+  String get exerciseCategoryChest;
+
+  /// No description provided for @exerciseCategoryLegs.
+  ///
+  /// In en, this message translates to:
+  /// **'Legs'**
+  String get exerciseCategoryLegs;
+
+  /// No description provided for @exerciseCategoryShoulders.
+  ///
+  /// In en, this message translates to:
+  /// **'Shoulders'**
+  String get exerciseCategoryShoulders;
+
+  /// No description provided for @exerciseCategoryCore.
+  ///
+  /// In en, this message translates to:
+  /// **'Abs & core'**
+  String get exerciseCategoryCore;
+
+  /// No description provided for @noExercisesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No exercises yet. Add your first exercise to begin.'**
+  String get noExercisesYet;
+
+  /// No description provided for @deleteExercise.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove exercise'**
+  String get deleteExercise;
+
+  /// No description provided for @exerciseSessionsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sets'**
+  String exerciseSessionsLabel(int count);
 
   /// No description provided for @aiCoachTitle.
   ///
@@ -337,6 +547,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add to cart'**
   String get addToCart;
+
+  /// No description provided for @cartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart • {count} items'**
+  String cartTitle(int count);
+
+  /// No description provided for @cartEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart is empty'**
+  String get cartEmpty;
+
+  /// No description provided for @cartTotalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Total (incl. 15% VAT)'**
+  String get cartTotalLabel;
+
+  /// No description provided for @cartCheckoutButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get cartCheckoutButton;
+
+  /// No description provided for @cartViewButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View cart'**
+  String get cartViewButton;
+
+  /// No description provided for @personalInfoSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal details'**
+  String get personalInfoSection;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailLabel;
+
+  /// No description provided for @weightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get weightLabel;
+
+  /// No description provided for @heightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get heightLabel;
+
+  /// No description provided for @profileSaveButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Save details'**
+  String get profileSaveButton;
+
+  /// No description provided for @profileSavedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully.'**
+  String get profileSavedMessage;
+
+  /// No description provided for @membershipSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Club membership'**
+  String get membershipSection;
+
+  /// No description provided for @membershipRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days remaining'**
+  String membershipRemaining(int days);
+
+  /// No description provided for @membershipPlans.
+  ///
+  /// In en, this message translates to:
+  /// **'Plans'**
+  String get membershipPlans;
+
+  /// No description provided for @membershipPlanMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get membershipPlanMonthly;
+
+  /// No description provided for @membershipPlanQuarterly.
+  ///
+  /// In en, this message translates to:
+  /// **'Quarterly'**
+  String get membershipPlanQuarterly;
+
+  /// No description provided for @membershipPlanSemiAnnual.
+  ///
+  /// In en, this message translates to:
+  /// **'Semi-annual'**
+  String get membershipPlanSemiAnnual;
+
+  /// No description provided for @membershipPlanAnnual.
+  ///
+  /// In en, this message translates to:
+  /// **'Annual'**
+  String get membershipPlanAnnual;
+
+  /// No description provided for @membershipComparisonTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare plans'**
+  String get membershipComparisonTitle;
+
+  /// No description provided for @membershipRenewButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Renew membership'**
+  String get membershipRenewButton;
+
+  /// No description provided for @membershipRenewSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Membership renewed for {plan}.'**
+  String membershipRenewSuccess(String plan);
+
+  /// No description provided for @supportSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get supportSection;
+
+  /// No description provided for @supportEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Need help? Contact us'**
+  String get supportEmailLabel;
+
+  /// No description provided for @supportEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'krom306@gmail.com'**
+  String get supportEmail;
 
   /// No description provided for @settingsTitle.
   ///
@@ -661,6 +1015,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Smart assistants coordinate nutrition, training, and community challenges in real time.'**
   String get onboardingSubtitle3;
+
+  /// No description provided for @calcTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Calorie calculator'**
+  String get calcTitle;
+
+  /// No description provided for @calcAgeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Age'**
+  String get calcAgeLabel;
+
+  /// No description provided for @calcAgeSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'yrs'**
+  String get calcAgeSuffix;
+
+  /// No description provided for @calcHeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get calcHeightLabel;
+
+  /// No description provided for @calcHeightSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'cm'**
+  String get calcHeightSuffix;
+
+  /// No description provided for @calcWeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current weight'**
+  String get calcWeightLabel;
+
+  /// No description provided for @calcWeightSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'kg'**
+  String get calcWeightSuffix;
+
+  /// No description provided for @calcTargetWeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Target weight'**
+  String get calcTargetWeightLabel;
+
+  /// No description provided for @calcGenderMale.
+  ///
+  /// In en, this message translates to:
+  /// **'Male'**
+  String get calcGenderMale;
+
+  /// No description provided for @calcGenderFemale.
+  ///
+  /// In en, this message translates to:
+  /// **'Female'**
+  String get calcGenderFemale;
+
+  /// No description provided for @calcActivityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity level'**
+  String get calcActivityLabel;
+
+  /// No description provided for @calcActivitySedentary.
+  ///
+  /// In en, this message translates to:
+  /// **'Sedentary (office job)'**
+  String get calcActivitySedentary;
+
+  /// No description provided for @calcActivityLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light (1-3 days/week)'**
+  String get calcActivityLight;
+
+  /// No description provided for @calcActivityModerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate (3-5 days/week)'**
+  String get calcActivityModerate;
+
+  /// No description provided for @calcActivityActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active (6-7 days/week)'**
+  String get calcActivityActive;
+
+  /// No description provided for @calcActivityVeryActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Very active (athlete)'**
+  String get calcActivityVeryActive;
+
+  /// No description provided for @calcGoalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Your goal'**
+  String get calcGoalLabel;
+
+  /// No description provided for @calcGoalLose.
+  ///
+  /// In en, this message translates to:
+  /// **'Lose weight'**
+  String get calcGoalLose;
+
+  /// No description provided for @calcGoalMaintain.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain weight'**
+  String get calcGoalMaintain;
+
+  /// No description provided for @calcGoalGain.
+  ///
+  /// In en, this message translates to:
+  /// **'Gain weight'**
+  String get calcGoalGain;
+
+  /// No description provided for @calcResultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily intake suggestion'**
+  String get calcResultTitle;
+
+  /// No description provided for @calcResultUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'kcal'**
+  String get calcResultUnit;
+
+  /// No description provided for @calcTimeEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated time to goal: {weeks} weeks'**
+  String calcTimeEstimate(int weeks);
 }
 
 class _AppLocalizationsDelegate

@@ -1,7 +1,7 @@
 {
   "appTitle": "Elite Fitness",
   "navHome": "Home",
-  "navTrack": "Track",
+  "navTrack": "Log workout",
   "navAi": "AI",
   "navShop": "Shop",
   "navSettings": "Settings",
@@ -57,14 +57,37 @@
       }
     }
   },
-  "trackTitle": "Weight tracker",
-  "trackSubtitle": "Monitor trends, log sessions, and hit your target weight.",
+  "trackTitle": "Log workout",
+  "trackSubtitle": "Name your day, pick exercises, and capture every set.",
+  "logWorkout": "Log workout",
+  "workoutNameLabel": "Workout name",
+  "workoutNameHint": "Add a name to this session",
+  "timeLabel": "Time",
+  "timerLabel": "Timer",
+  "restTimerLabel": "Rest timer",
+  "volumeLabel": "Volume",
+  "setsLabel": "Sets",
+  "setsHeader": "Sets",
+  "addSet": "Add set",
+  "noSetsYet": "No sets yet. Add your first set to begin tracking.",
+  "weightFieldLabel": "Weight (kg)",
+  "invalidWeight": "Enter a valid weight",
+  "repsFieldLabel": "Reps",
+  "invalidReps": "Enter a valid rep count",
+  "cancel": "Cancel",
+  "saveSet": "Save set",
+  "deleteSet": "Delete set",
+  "resumeButton": "Resume",
+  "finishButton": "Finish",
+  "resetButton": "Reset",
+  "resetSessionButton": "Reset session",
+  "summaryHeader": "Summary of sets",
   "weekTab": "Week",
   "monthTab": "Month",
   "yearTab": "Year",
   "weightTrendTitle": "Trend",
   "weightTrendSubtitle": "Last 7 sessions",
-  "logWeightButton": "Log weight",
+  "logWeightButton": "Log workout",
   "currentWeight": "Current",
   "goalWeight": "Goal {value} kg",
   "@goalWeight": {
@@ -82,6 +105,39 @@
   "shopSubtitle": "Curated essentials that match your training plan.",
   "shopSearchHint": "Search supplements, apparel, gear...",
   "addToCart": "Add to cart",
+  "cartTitle": "Cart • {count} items",
+  "@cartTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cartEmpty": "Your cart is empty",
+  "cartTotalLabel": "Total (incl. 15% VAT)",
+  "cartCheckoutButton": "Checkout",
+  "cartViewButton": "View cart",
+  "personalInfoSection": "Personal details",
+  "emailLabel": "Email",
+  "weightLabel": "Weight",
+  "heightLabel": "Height",
+  "membershipSection": "Club membership",
+  "membershipRemaining": "{days} days remaining",
+  "@membershipRemaining": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "membershipPlans": "Plans",
+  "membershipPlanMonthly": "Monthly",
+  "membershipPlanQuarterly": "Quarterly",
+  "membershipPlanSemiAnnual": "Semi-annual",
+  "membershipPlanAnnual": "Annual",
+  "supportSection": "Support",
+  "supportEmailLabel": "Need help? Contact us",
+  "supportEmail": "krom306@gmail.com",
   "settingsTitle": "Settings",
   "settingsSubtitle": "Fine-tune experience, integrations, and account.",
   "accountSection": "ACCOUNT",
@@ -156,5 +212,66 @@
   "onboardingTitle2": "Track every rep and recovery",
   "onboardingSubtitle2": "Integrate wearables, monitor fatigue, and adjust your load instantly.",
   "onboardingTitle3": "AI microservices on standby",
-  "onboardingSubtitle3": "Smart assistants coordinate nutrition, training, and community challenges in real time."
+  "onboardingSubtitle3": "Smart assistants coordinate nutrition, training, and community challenges in real time.",
+  "calcTitle": "Calorie calculator",
+  "calcAgeLabel": "Age",
+  "calcAgeSuffix": "yrs",
+  "calcHeightLabel": "Height",
+  "calcHeightSuffix": "cm",
+  "calcWeightLabel": "Current weight",
+  "calcWeightSuffix": "kg",
+  "calcTargetWeightLabel": "Target weight",
+  "calcGenderMale": "Male",
+  "calcGenderFemale": "Female",
+  "calcActivityLabel": "Activity level",
+  "calcActivitySedentary": "Sedentary (office job)",
+  "calcActivityLight": "Light (1-3 days/week)",
+  "calcActivityModerate": "Moderate (3-5 days/week)",
+  "calcActivityActive": "Active (6-7 days/week)",
+  "calcActivityVeryActive": "Very active (athlete)",
+  "calcGoalLabel": "Your goal",
+  "calcGoalLose": "Lose weight",
+  "calcGoalMaintain": "Maintain weight",
+  "calcGoalGain": "Gain weight",
+  "calcResultTitle": "Daily intake suggestion",
+  "calcResultUnit": "kcal",
+  "calcTimeEstimate": "Estimated time to goal: {weeks} weeks",
+  "@calcTimeEstimate": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "addExerciseButton": "Choose exercise",
+  "exercisePickerTitle": "Select exercise",
+  "exerciseSearchHint": "Search exercises",
+  "exerciseCategoryAll": "All",
+  "exerciseCategoryBack": "Back",
+  "exerciseCategoryChest": "Chest",
+  "exerciseCategoryLegs": "Legs",
+  "exerciseCategoryShoulders": "Shoulders",
+  "exerciseCategoryCore": "Abs & core",
+  "noExercisesYet": "No exercises yet. Add your first exercise to begin.",
+  "deleteExercise": "Remove exercise",
+  "exerciseSessionsLabel": "{count} sets",
+  "@exerciseSessionsLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "profileSaveButton": "Save details",
+  "profileSavedMessage": "Profile updated successfully.",
+  "membershipComparisonTitle": "Compare plans",
+  "membershipRenewButton": "Renew membership",
+  "membershipRenewSuccess": "Membership renewed for {plan}.",
+  "@membershipRenewSuccess": {
+    "placeholders": {
+      "plan": {
+        "type": "String"
+      }
+    }
+  }
 }

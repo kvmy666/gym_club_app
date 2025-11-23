@@ -1,14 +1,93 @@
 import 'package:flutter/material.dart';
-import '../../l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
-class ProfileScreen extends StatelessWidget {
+import '../../l10n/app_localizations.dart';
+
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  late final TextEditingController _emailController;
+  late final TextEditingController _weightController;
+  late final TextEditingController _heightController;
+
+  final List<_MembershipPlan> _plans = const [
+    _MembershipPlan(
+      id: 'monthly',
+      labelKey: 'membershipPlanMonthly',
+      price: 'SAR 299',
+      duration: '30 days',
+      perks: ['Unlimited gym access', '1 PT session', 'Sauna access'],
+    ),
+    _MembershipPlan(
+      id: 'quarterly',
+      labelKey: 'membershipPlanQuarterly',
+      price: 'SAR 799',
+      duration: '90 days',
+      perks: ['Unlimited access', '3 PT sessions', 'Sauna + pool'],
+    ),
+    _MembershipPlan(
+      id: 'semiAnnual',
+      labelKey: 'membershipPlanSemiAnnual',
+      price: 'SAR 1,299',
+      duration: '180 days',
+      perks: ['Unlimited access', 'Monthly body scan', 'Nutrition guide'],
+    ),
+    _MembershipPlan(
+      id: 'annual',
+      labelKey: 'membershipPlanAnnual',
+      price: 'SAR 2,299',
+      duration: '365 days',
+      perks: ['Unlimited access', 'Weekly PT check-in', 'Unlimited sauna/pool'],
+    ),
+  ];
+
+  String _selectedPlan = 'monthly';
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController(text: 'abdulkarim@email.com');
+    _weightController = TextEditingController(text: '78');
+    _heightController = TextEditingController(text: '178');
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _weightController.dispose();
+    _heightController.dispose();
+    super.dispose();
+  }
+
+  void _saveProfile(AppLocalizations l10n) {
+    FocusScope.of(context).unfocus();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.profileSavedMessage)),
+    );
+  }
+
+  void _renewMembership(AppLocalizations l10n) {
+    final label = _plans
+        .firstWhere((plan) => plan.id == _selectedPlan)
+        .localizedLabel(l10n);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.membershipRenewSuccess(label))),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+
+    const userName = 'Abdulkarim Al-Shudukhi';
+    const membershipTier = 'Elite Plus';
+    const daysRemaining = 18;
 
     return Scaffold(
       appBar: AppBar(
@@ -70,7 +149,7 @@ class ProfileScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Sara Al-Qahtani',
+                          userName,
                           style: theme.textTheme.titleLarge?.copyWith(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
@@ -78,7 +157,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          l10n.profileGoalLabel('Hypertrophy • 4x / week'),
+                          _emailController.text,
                           style: theme.textTheme.bodyMedium?.copyWith(
                             color: Colors.white70,
                           ),
@@ -94,7 +173,7 @@ class ProfileScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: Text(
-                            l10n.membershipStatusLabel('Elite Plus'),
+                            l10n.membershipStatusLabel(membershipTier),
                             style: theme.textTheme.labelMedium?.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
@@ -109,86 +188,69 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.metricsSection,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _MetricTile(
-                          label: l10n.metricWorkouts,
-                          value: '148',
-                        ),
-                      ),
-                      Expanded(
-                        child: _MetricTile(
-                          label: l10n.metricMinutes,
-                          value: '11.3k',
-                        ),
-                      ),
-                      Expanded(
-                        child: _MetricTile(
-                          label: l10n.metricCalories,
-                          value: '86k',
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+          _InfoCard(
+            title: l10n.personalInfoSection,
+            rows: [
+              _EditableField(
+                controller: _emailController,
+                label: l10n.emailLabel,
+                icon: Icons.mail_outline,
+                keyboardType: TextInputType.emailAddress,
               ),
-            ),
-          ),
-          const SizedBox(height: 24),
-          _ProfileSection(
-            title: l10n.preferencesSection,
-            children: [
-              _ProfileTile(
-                icon: Icons.flag,
-                title: l10n.goalTile,
-                subtitle: 'Build strength & athleticism',
-                onTap: () {},
+              _EditableField(
+                controller: _weightController,
+                label: l10n.weightLabel,
+                icon: Icons.monitor_weight,
+                suffix: 'kg',
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
               ),
-              _ProfileTile(
-                icon: Icons.access_time,
-                title: l10n.scheduleTile,
-                subtitle: l10n.scheduleTileSubtitle,
-                onTap: () {},
+              _EditableField(
+                controller: _heightController,
+                label: l10n.heightLabel,
+                icon: Icons.height,
+                suffix: 'cm',
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
               ),
-              _ProfileTile(
-                icon: Icons.fastfood_outlined,
-                title: l10n.nutritionTile,
-                subtitle: '2,300 kcal • 180g protein',
-                onTap: () {},
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: () => _saveProfile(l10n),
+                  child: Text(l10n.profileSaveButton),
+                ),
               ),
             ],
           ),
           const SizedBox(height: 24),
-          _ProfileSection(
-            title: l10n.securitySection,
-            children: [
-              _ProfileTile(
-                icon: Icons.lock_outline,
-                title: l10n.passwordTile,
-                subtitle: l10n.passwordTileSubtitle,
-                onTap: () => context.go('/auth/reset'),
-              ),
-              _ProfileTile(
-                icon: Icons.devices_other,
-                title: l10n.devicesTile,
-                subtitle: l10n.devicesTileSubtitle,
-                onTap: () {},
-              ),
-            ],
+          _MembershipCard(
+            title: l10n.membershipSection,
+            tier: membershipTier,
+            remainingLabel: l10n.membershipRemaining(daysRemaining),
+            plansTitle: l10n.membershipComparisonTitle,
+            plans: _plans
+                .map(
+                  (plan) => _PlanOptionCard(
+                    plan: plan,
+                    isSelected: plan.id == _selectedPlan,
+                    onSelected: () {
+                      setState(() => _selectedPlan = plan.id);
+                    },
+                  ),
+                )
+                .toList(),
+            onRenew: () => _renewMembership(l10n),
+            selectedPlanLabel: _plans
+                .firstWhere((plan) => plan.id == _selectedPlan)
+                .localizedLabel(l10n),
+            renewLabel: l10n.membershipRenewButton,
+          ),
+          const SizedBox(height: 24),
+          _SupportCard(
+            title: l10n.supportSection,
+            subtitle: l10n.supportEmailLabel,
+            email: l10n.supportEmail,
           ),
         ],
       ),
@@ -196,96 +258,334 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class _MetricTile extends StatelessWidget {
-  const _MetricTile({required this.label, required this.value});
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          value,
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 6),
-        Text(
-          label,
-          style: theme.textTheme.labelMedium?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _ProfileSection extends StatelessWidget {
-  const _ProfileSection({required this.title, required this.children});
+class _InfoCard extends StatelessWidget {
+  const _InfoCard({required this.title, required this.rows});
 
   final String title;
-  final List<Widget> children;
+  final List<Widget> rows;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 16),
+            ...rows,
+          ],
         ),
-        const SizedBox(height: 12),
-        Card(child: Column(children: children)),
-      ],
+      ),
     );
   }
 }
 
-class _ProfileTile extends StatelessWidget {
-  const _ProfileTile({
+class _EditableField extends StatelessWidget {
+  const _EditableField({
+    required this.controller,
+    required this.label,
     required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.onTap,
+    this.suffix,
+    this.keyboardType,
   });
 
+  final TextEditingController controller;
+  final String label;
   final IconData icon;
+  final String? suffix;
+  final TextInputType? keyboardType;
+
+  @override
+  Widget build(BuildContext context) {
+   // final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: TextField(
+        controller: controller,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: Icon(icon),
+          suffixText: suffix,
+        ),
+      ),
+    );
+  }
+}
+
+class _MembershipCard extends StatelessWidget {
+  const _MembershipCard({
+    required this.title,
+    required this.tier,
+    required this.remainingLabel,
+    required this.plansTitle,
+    required this.plans,
+    required this.selectedPlanLabel,
+    required this.renewLabel,
+    required this.onRenew,
+  });
+
   final String title;
-  final String subtitle;
-  final VoidCallback onTap;
+  final String tier;
+  final String remainingLabel;
+  final String plansTitle;
+  final List<Widget> plans;
+  final String selectedPlanLabel;
+  final String renewLabel;
+  final VoidCallback onRenew;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return ListTile(
-      onTap: onTap,
-      leading: Container(
-        height: 46,
-        width: 46,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: theme.colorScheme.primary.withValues(alpha: 0.12),
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        tier,
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        remainingLabel,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              plansTitle,
+              style: theme.textTheme.labelLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 12),
+            ...plans,
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                const Icon(Icons.check_circle_outline),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    selectedPlanLabel,
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                onPressed: onRenew,
+                child: Text(renewLabel),
+              ),
+            ),
+          ],
         ),
-        child: Icon(icon, color: theme.colorScheme.primary),
       ),
-      title: Text(
-        title,
-        style: theme.textTheme.titleMedium?.copyWith(
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-      subtitle: Text(subtitle),
-      trailing: const Icon(Icons.chevron_right),
     );
+  }
+}
+
+class _PlanOptionCard extends StatelessWidget {
+  const _PlanOptionCard({
+    required this.plan,
+    required this.isSelected,
+    required this.onSelected,
+  });
+
+  final _MembershipPlan plan;
+  final bool isSelected;
+  final VoidCallback onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: BorderSide(
+          color: isSelected
+              ? theme.colorScheme.primary
+              : theme.colorScheme.outlineVariant,
+        ),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: onSelected,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      plan.localizedLabel(l10n),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    isSelected
+                        ? Icons.radio_button_checked
+                        : Icons.radio_button_off,
+                    color: theme.colorScheme.primary,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                plan.duration,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                plan.price,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 8),
+              ...plan.perks.map(
+                (perk) => Row(
+                  children: [
+                    const Icon(Icons.check, size: 16),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        perk,
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SupportCard extends StatelessWidget {
+  const _SupportCard({
+    required this.title,
+    required this.subtitle,
+    required this.email,
+  });
+
+  final String title;
+  final String subtitle;
+  final String email;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              subtitle,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                const Icon(Icons.email_outlined),
+                const SizedBox(width: 8),
+                Text(
+                  email,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MembershipPlan {
+  const _MembershipPlan({
+    required this.id,
+    required this.labelKey,
+    required this.price,
+    required this.duration,
+    required this.perks,
+  });
+
+  final String id;
+  final String labelKey;
+  final String price;
+  final String duration;
+  final List<String> perks;
+
+  String localizedLabel(AppLocalizations l10n) {
+    switch (labelKey) {
+      case 'membershipPlanMonthly':
+        return l10n.membershipPlanMonthly;
+      case 'membershipPlanQuarterly':
+        return l10n.membershipPlanQuarterly;
+      case 'membershipPlanSemiAnnual':
+        return l10n.membershipPlanSemiAnnual;
+      case 'membershipPlanAnnual':
+        return l10n.membershipPlanAnnual;
+      default:
+        return labelKey;
+    }
   }
 }
