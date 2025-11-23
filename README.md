@@ -1,16 +1,15 @@
-# gym_club_app
+# gym_app
 
-A new Flutter project.
+ this is project for subject requierments in software engineer 
+ <h3>the main goal is : </h3>   to build gym application and sell the software .
+ the project <h3>progress is 40% </h3>
 
-## Getting Started
+ <h2> to run the project follow these steps : </h2>
+1- make sure that you installed flutter 
+2-git clone https://github.com/kvmy666/gym_club_app.git
+cd gym_club_app
+3-after cloning the repo you can open the folder "gym_club_app" on vs code 
+4-run android emulatior or chrome 
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ 
